@@ -97,17 +97,17 @@ pub fn draw_gizmos(
     let root = tracking_root_query.get_single();
     match root {
         Ok(position) => {
-            gizmos.circle(
-                position.translation
-                    + Vec3 {
-                        x: 0.0,
-                        y: 0.01,
-                        z: 0.0,
-                    },
-                Vec3::Y,
-                0.2,
-                Color::RED,
-            );
+            // gizmos.circle(
+            //     position.translation
+            //         + Vec3 {
+            //             x: 0.0,
+            //             y: 0.01,
+            //             z: 0.0,
+            //         },
+            //     Vec3::Y,
+            //     0.2,
+            //     Color::RED,
+            // );
         }
         Err(_) => info!("too many tracking roots"),
     }
