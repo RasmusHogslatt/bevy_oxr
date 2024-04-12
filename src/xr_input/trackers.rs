@@ -7,6 +7,7 @@ use crate::{
     input::XrInput,
     resources::{XrFrameState, XrSession},
 };
+use bevy::math::Quat;
 
 use super::{actions::XrActionSets, oculus_touch::OculusController, Hand, QuatConv, Vec3Conv};
 
@@ -133,7 +134,12 @@ pub fn update_open_xr_controllers(
     let right_rotataion = right_controller_query.get_single_mut();
     match right_rotataion {
         Ok(mut right_entity) => {
-            right_entity.0.rotation = right_grip_space.0.pose.orientation.to_quat()
+            // rotate down by 35 degrees
+            let angle: f32 = 45.0;
+            let mut rot = right_grip_space.0.pose.orientation.to_quat();
+            rot = rot * Quat::from_rotation_x(-angle.to_radians());
+            right_entity.0.rotation = rot;
+            // right_entity.0.rotation = right_grip_space.0.pose.orientation.to_quat()
         }
         Err(_) => (),
     }
